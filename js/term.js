@@ -28,20 +28,9 @@ let playerPoint = 0;
 let dealerPoint = 0;
 let betMoney = 0;
 let chip = 100;
+let hiddenCard = "";
 ///////////////////////////Play Button/////////////////////////////
-function playStart(){
-  console.log("start");
-  makeRandom();
-  firstPoint();
-  if(playerPoint == 21){
-    document.getElementById("decision").innerHTML = 
-    "YOU WIN";
-    document.getElementById("play").disabled = true;
-    document.getElementById("reset").style.display = 'block';
-    return;
-  }
-  showBet();
-}
+
 function showBet(){
   document.getElementById("bet_container").style.display = 'block';
   document.getElementById("play").disabled = true;
@@ -101,6 +90,7 @@ function makeRandom(){
     }
     else if(i == 1) {
       console.log("dealer card : ", cardName);
+      hiddenCard = cardName;
       if(cardNum >= 9) cardNum = 10;
       else cardNum++;
       dealerCard.push(cardNum);
@@ -119,11 +109,44 @@ function makeRandom(){
     }
   }
 }
+function playStart(){
+  console.log("start");
+  makeRandom();
+  firstPoint();
+  if(playerPoint == 21){
+    document.getElementById("decision").innerHTML = 
+    "YOU WIN";
+    document.getElementById("play").disabled = true;
+    document.getElementById("next_game").style.display = 'block';
+    return;
+  }
+  showBet();
+}
 ///////////////////////////Bet Button/////////////////////////////
+function betStart(){
+  betMoney = document.getElementById("bet_money").value;
+  if(betMoney >= 1 && betMoney <= chip) writeBet(betMoney);
+  else {
+    alert("올바른 베팅 금액을 쓰세요.");
+  }
+}
+
+function writeBet(){
+  document.getElementById("bet_money").value = "";
+  document.getElementById("bet_place").style.display = 'block';
+  document.getElementById("now_bet").innerHTML = betMoney;
+  document.getElementById("bet_container").style.display = 'none';
+  chip -= betMoney;
+  document.getElementById("chip_count").innerHTML = chip;
+  document.getElementById("hit").disabled = false;
+  document.getElementById("stay").disabled = false;
+}
 
 function start() {
   var playButton = document.getElementById("play");
   playButton.addEventListener("click", playStart, false);
+  var betButton = document.getElementById("bet");
+  betButton.addEventListener("click", betStart, false);
 } 
 
 window.addEventListener("load", start, false);

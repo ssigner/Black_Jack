@@ -7,8 +7,8 @@
         <script type="text/javascript" src="js/term.js"></script>
     </head>
     <body>
-      <h1>Black Jack</h1>
-      <h1 id = "decision"></h1>
+      <p id = "title">Black Jack</p>
+      <p id = "decision"></>
       <p>dealer</p>
       <div id = "container_d">
           
@@ -23,16 +23,22 @@
       <p id = "chips">chips : 
         <a id = "chip_count">100</a>
       </p>
+      <a id = "bet_place">BETTING : 
+        <span id = "now_bet"></span>
+      </a>
       </div>
       <form action = "#">
         <input id = "play" type = "button" value = "PLAY">
         <input id = "hit" type = "button" value = "HIT" disabled>
         <input id = "stay" type = "button" value = "STAY" disabled>
         <div id = "bet_container">
-          <input id = "bet_money" type = "text" placeholder="EX) 100">
+          <input id = "bet_money" type = "text" placeholder="EX) 100" value = "">
           <input id = "bet" type = "button" value = "BET!">
         </div>
-        <input id = "reset" type = "button" value = "RESET">
+        <div id = "next_game">
+          <input id = "stop" type = "button" value = "STOP">
+          <input id = "again" type = "button" value = "AGAIN?">
+        </div>
       </form>
     </body>
 </html>
