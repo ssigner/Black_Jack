@@ -24,18 +24,50 @@ for(var i = 0; i < 4; i++){
 //players card data
 const playerCard = [];
 const dealerCard = [];
-
+let playerPoint = 0;
+let dealerPoint = 0;
+let betMoney = 0;
+let chip = 100;
+///////////////////////////Play Button/////////////////////////////
 function playStart(){
   console.log("start");
   makeRandom();
+  firstPoint();
+  if(playerPoint == 21){
+    document.getElementById("decision").innerHTML = 
+    "YOU WIN";
+    document.getElementById("play").disabled = true;
+    document.getElementById("reset").style.display = 'block';
+    return;
+  }
+  showBet();
+}
+function showBet(){
+  document.getElementById("bet_container").style.display = 'block';
+  document.getElementById("play").disabled = true;
+}
+
+function firstPoint(){
+  if(
+    (dealerCard[0] == 1 && dealerCard[1] == 10) ||
+    (dealerCard[0] == 10 && dealerCard[1] == 1) 
+  ) dealerPoint = 21;
+  else dealerPoint = dealerCard[0] + dealerCard[1];
+
+  if(
+    (playerCard[0] == 1 && playerCard[1] == 10) ||
+    (playerCard[0] == 10 && playerCard[1] == 1) 
+  ) playerPoint = 21;
+  else playerPoint = playerCard[0] + playerCard[1];
+  console.log("player : ", playerPoint, "dealer : ", dealerPoint);
 }
 
 function makeRandom(){
   //변수 설정
   console.log("setVar");
+  let dealerCon = document.getElementById("container_d");
+  let playerCon = document.getElementById("container_p");
   var cardType, cardNum, cardSrc = "", cardName = "";
-  var dealerCon = document.getElementById("container_d");
-  var playerCon = document.getElementById("container_p");
 
   for(var i = 0; i < 4; i++){
     //카드 타입 모양 설정
@@ -46,10 +78,11 @@ function makeRandom(){
     console.log("cardCheck", cardsCheck[cardType][cardNum]);
 
     //카드 명 정하고 카드 배열에 push
-    while(!cardsCheck[cardType][cardNum]){
+    while(true){
       if(!cardsCheck[cardType][cardNum]){
         cardName = cards[cardType][cardNum];
         cardsCheck[cardType][cardNum] = true;
+        break;
       }
       else {
         cardType = Math.floor(Math.random() * 4);
@@ -57,22 +90,36 @@ function makeRandom(){
       }
     }
 
-    if(i <= 1) {
+    if(i == 0) {
       console.log("dealer card : ", cardName);
-      dealerCard.push(cardName);
+      if(cardNum >= 9) cardNum = 10;
+      else cardNum++;
+      dealerCard.push(cardNum);
       cardSrc = "./js/trump/" + cardName + ".png";
       console.log("Src : ", cardSrc);
       dealerCon.innerHTML += "<img src = '" + cardSrc + "'>"
-    } 
-    if(i >=2) {
+    }
+    else if(i == 1) {
+      console.log("dealer card : ", cardName);
+      if(cardNum >= 9) cardNum = 10;
+      else cardNum++;
+      dealerCard.push(cardNum);
+      cardSrc = "js/trump/back.png";
+      console.log("Src : ", cardSrc);
+      dealerCon.innerHTML += "<img src = '" + cardSrc + "'>"
+    }
+    else if(i >= 2) {
       console.log("player card : ", cardName);
-      playerCard.push(cardName);
+      if(cardNum >= 9) cardNum = 10;
+      else cardNum++;
+      playerCard.push(cardNum);
       cardSrc = "./js/trump/" + cardName + ".png";
       console.log("Src : ", cardSrc);
       playerCon.innerHTML += "<img src = '" + cardSrc + "'>"
     }
   }
 }
+///////////////////////////Bet Button/////////////////////////////
 
 function start() {
   var playButton = document.getElementById("play");

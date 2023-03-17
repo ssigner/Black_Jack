@@ -6,8 +6,19 @@ p
 }
 img 
 {
-  width : 140px; 
-  height: 200px;
+  width : 100px; 
+  height: 143px;
+}
+h1 
+{
+  font-family: fantasy;
+}
+input 
+{
+  font-family: fantasy;
+  margin-top: 5px;
+  margin-right: 10px;
+  float: left;
 }
 
 #container_d, #container_p
@@ -22,6 +33,15 @@ img
 
 #bet_container
 {
-  margin-top: 10px;
+  float:left;
+  margin-left: 10px;
   display: none;
+}
+#reset
+{
+  display: none;
+}
+#decision
+{
+  color: #FF0000
 }
