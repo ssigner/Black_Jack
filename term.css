@@ -10,7 +10,7 @@ img
   height: 200px;
 }
 
-#container
+#container_d, #container_p
 { 
   border: 5px ridge royalblue; 
   padding: 10px; 
