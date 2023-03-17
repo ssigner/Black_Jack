@@ -4,29 +4,34 @@
         <meta charset="UTF-8"/>
         <title>term</title>
         <link rel = "stylesheet" type = "text/css" href = "term.css">
-        <script type="text/javascript" src="term.js"></script>
+        <script type="text/javascript" src="js/term.js"></script>
     </head>
     <body>
-        <h1>Black Jack</h1>
-        <p>dealer</p>
-        <div id = "container">
-            
+      <h1>Black Jack</h1>
+      <p>dealer</p>
+      <div id = "container">
+          
+      </div>
+      <p>player</p>
+      <div id = "container">
+        <img src = "js/trump/clover1.png">
+        <img src = "js/trump/clover2.png">
+      </div>
+      <p id = "score">high score : 
+        <a id = "score_point">0</a>
+      </p>
+      <p id = "chips">chips : 
+        <a id = "chip_count">100</a>
+      </p>
+      </div>
+      <form action = "#">
+        <input id = "play" type = "button" value = "PLAY">
+        <input id = "hit" type = "button" value = "HIT" disabled>
+        <input id = "stay" type = "button" value = "STAY" disabled>
+        <div id = "bet_container">
+          <input id = "bet_money" type = "text" placeholder="EX) 100">
+          <input id = "bet" type = "button" value = "BET!">
         </div>
-        <p>player</p>
-        <div id = "container">
-            <img src = "trump/clover1.png">
-            <img src = "trump/clover2.png">
-        </div>
-        <p id = "score">score : </p>
-        <p id = "chips">chips : </p>
-        </div>
-        <form action = "#">
-            <input id = "play" type = "button" value = "PLAY">
-            <input id = "hit" type = "button" value = "HIT" disabled>
-            <input id = "stay" type = "button" value = "STAY" disabled>
-            <!--
-            <input id = "show" type = "button" value = "SHOW">
-            -->
-         </form>
+      </form>
     </body>
 </html>
