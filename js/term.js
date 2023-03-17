@@ -72,7 +72,6 @@ function makeRandom(){
       playerCon.innerHTML += "<img src = '" + cardSrc + "'>"
     }
   }
-  
 }
 
 function start() {
