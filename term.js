@@ -1,3 +1,4 @@
+/*Cards Array*/ 
 const cards = new Array(4);
 for(var i = 0; i < 4; i++){
     cards[i] = new Array(13);
@@ -10,8 +11,8 @@ for(var i = 0; i < 4; i++){
         if(i == 3) cards[i][j-1] = "diamond" + j;
     }
 }
+/*function*/
 
-/*
 function showContent(){
     var Area = document.getElementById("blank");
     var content = "<p>"
@@ -23,7 +24,7 @@ function showContent(){
     content = content + "</p>";
     Area.innerHTML = content;
 }
-*/
+
 function start() {
     var playButton = document.getElementById("show");
     playButton.addEventListener("click", showContent, false);
