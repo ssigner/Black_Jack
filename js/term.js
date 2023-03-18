@@ -147,8 +147,24 @@ function writeBet(){
   document.getElementById("play").disabled = false;
 }
 ///////////////////////////Win lose/////////////////////////////
-function decision(){
-  
+function decision(dealerStart){
+  if(playerPoint > 21){
+    document.getElementById("decision").innerHTML = 
+    "YOU LOSE";
+    decision_doc();
+    return 1;
+  } else {
+    return 0; //TODO stay시 딜러의 경우도 추가
+  }
+}
+function decision_doc(){
+  document.getElementById("play").disabled = true;
+  document.getElementById("next_game").style.display = 'block';
+  document.getElementById("hit").disabled = true;
+  document.getElementById("stay").disabled = true;
+  document.getElementById("bet_place").style.display = 'none';
+  betMoney = 0;
+  document.getElementById("bet_money").value = betMoney;
 }
 ///////////////////////////Hit Button/////////////////////////////
 function hitting(){
@@ -156,12 +172,12 @@ function hitting(){
   if(cardNum >= 9) cardNum = 10;
   else cardNum++;
   playerPoint += cardNum;
-
   console.log(playerPoint);
   cardSrc = "js/trump/" + cardName + ".png";
   console.log("Src : ", cardSrc);
   document.getElementById("container_p").innerHTML += 
   "<img src = '" + cardSrc + "'>";
+  if(decision()) return;
 }
 ///////////////////////////First View/////////////////////////////
 function firstView(){
