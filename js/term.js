@@ -1,27 +1,29 @@
-//cards Data
-const cards = new Array(4);
-for(var i = 0; i < 4; i++){
-  cards[i] = new Array(13);
-}
-for(var i = 0; i < 4; i++){
-  for(var j = 1; j < 14; j++){
-    if(i == 0) cards[i][j-1] = "spade" + j;
-    if(i == 1) cards[i][j-1] = "heart" + j;
-    if(i == 2) cards[i][j-1] = "clover" + j;
-    if(i == 3) cards[i][j-1] = "diamond" + j;
-  }
-}
 
-let cardsCheck = new Array(4);
-for(var i = 0; i < 4; i++){
-  cardsCheck[i] = new Array(13);
-}
-for(var i = 0; i < 4; i++){
-  for(var j = 0; j < 13; j++){
-    cardsCheck[i][j] = false;
+//cards Data
+  const cards = new Array(4);
+  for(var i = 0; i < 4; i++){
+    cards[i] = new Array(13);
   }
-}
+  for(var i = 0; i < 4; i++){
+    for(var j = 1; j < 14; j++){
+      if(i == 0) cards[i][j-1] = "spade" + j;
+      if(i == 1) cards[i][j-1] = "heart" + j;
+      if(i == 2) cards[i][j-1] = "clover" + j;
+      if(i == 3) cards[i][j-1] = "diamond" + j;
+    }
+  }
+
+  let cardsCheck = new Array(4);
+  for(var i = 0; i < 4; i++){
+    cardsCheck[i] = new Array(13);
+  }
+  for(var i = 0; i < 4; i++){
+    for(var j = 0; j < 13; j++){
+      cardsCheck[i][j] = false;
+    }
+  }
 //players card data
+
 const playerCard = [];
 const dealerCard = [];
 let playerPoint = 0;
@@ -29,14 +31,13 @@ let dealerPoint = 0;
 let betMoney = 0;
 let chip = 100;
 let hiddenCard = "";
+let cardType, cardNum, cardSrc = "", cardName = "";
+
 ///////////////////////////Play Button/////////////////////////////
 
-function showBet(){
-  document.getElementById("bet_container").style.display = 'block';
-  document.getElementById("play").disabled = true;
-}
-
 function firstPoint(){
+  //첫 카드가 블랙잭일 경우
+  //playerCard[0] = 1; playerCard[1] = 10;
   if(
     (dealerCard[0] == 1 && dealerCard[1] == 10) ||
     (dealerCard[0] == 10 && dealerCard[1] == 1) 
@@ -46,45 +47,49 @@ function firstPoint(){
   if(
     (playerCard[0] == 1 && playerCard[1] == 10) ||
     (playerCard[0] == 10 && playerCard[1] == 1) 
-  ) playerPoint = 21;
+  ){
+    //1.5배 판정
+    playerPoint = 21;
+    chip = parseInt(chip) + parseInt(betMoney) + parseInt(Math.round(betMoney * 1.5))
+    betMoney = 0;
+    document.getElementById("bet_place").style.display = 'none';
+    document.getElementById("chip_count").innerHTML = chip;
+  } 
   else playerPoint = playerCard[0] + playerCard[1];
   console.log("player : ", playerPoint, "dealer : ", dealerPoint);
 }
-
+function randomCard(){
+  //카드 타입 모양 설정
+  cardType = Math.floor(Math.random() * 4);
+  cardNum = Math.floor(Math.random() * 13);
+  
+  //카드 명 정하고 카드 배열에 push
+  while(true){
+    if(!cardsCheck[cardType][cardNum]){
+      cardName = cards[cardType][cardNum];
+      cardsCheck[cardType][cardNum] = true;
+      break;
+    }
+    else {
+      cardType = Math.floor(Math.random() * 4);
+      cardNum = Math.floor(Math.random() * 13);
+    }
+  }
+}
 function makeRandom(){
   //변수 설정
-  console.log("setVar");
   let dealerCon = document.getElementById("container_d");
   let playerCon = document.getElementById("container_p");
-  var cardType, cardNum, cardSrc = "", cardName = "";
-
+  dealerCon.innerHTML = "";
+  playerCon.innerHTML = "";
   for(var i = 0; i < 4; i++){
-    //카드 타입 모양 설정
-    cardType = Math.floor(Math.random() * 4);
-    cardNum = Math.floor(Math.random() * 13);
-    
-    console.log("card", cardType, cardNum);
-    console.log("cardCheck", cardsCheck[cardType][cardNum]);
-
-    //카드 명 정하고 카드 배열에 push
-    while(true){
-      if(!cardsCheck[cardType][cardNum]){
-        cardName = cards[cardType][cardNum];
-        cardsCheck[cardType][cardNum] = true;
-        break;
-      }
-      else {
-        cardType = Math.floor(Math.random() * 4);
-        cardNum = Math.floor(Math.random() * 13);
-      }
-    }
-
+    randomCard();
     if(i == 0) {
       console.log("dealer card : ", cardName);
       if(cardNum >= 9) cardNum = 10;
       else cardNum++;
       dealerCard.push(cardNum);
-      cardSrc = "./js/trump/" + cardName + ".png";
+      cardSrc = "js/trump/" + cardName + ".png";
       console.log("Src : ", cardSrc);
       dealerCon.innerHTML += "<img src = '" + cardSrc + "'>"
     }
@@ -96,21 +101,21 @@ function makeRandom(){
       dealerCard.push(cardNum);
       cardSrc = "js/trump/back.png";
       console.log("Src : ", cardSrc);
-      dealerCon.innerHTML += "<img src = '" + cardSrc + "'>"
+      dealerCon.innerHTML += "<img src = '" + cardSrc + "'>";
     }
     else if(i >= 2) {
       console.log("player card : ", cardName);
       if(cardNum >= 9) cardNum = 10;
       else cardNum++;
       playerCard.push(cardNum);
-      cardSrc = "./js/trump/" + cardName + ".png";
+      cardSrc = "js/trump/" + cardName + ".png";
       console.log("Src : ", cardSrc);
-      playerCon.innerHTML += "<img src = '" + cardSrc + "'>"
+      playerCon.innerHTML += "<img src = '" + cardSrc + "'>";
     }
   }
 }
 function playStart(){
-  console.log("start");
+  document.getElementById("play").disabled = true
   makeRandom();
   firstPoint();
   if(playerPoint == 21){
@@ -120,7 +125,8 @@ function playStart(){
     document.getElementById("next_game").style.display = 'block';
     return;
   }
-  showBet();
+  document.getElementById("hit").disabled = false;
+  document.getElementById("stay").disabled = false;
 }
 ///////////////////////////Bet Button/////////////////////////////
 function betStart(){
@@ -138,15 +144,40 @@ function writeBet(){
   document.getElementById("bet_container").style.display = 'none';
   chip -= betMoney;
   document.getElementById("chip_count").innerHTML = chip;
-  document.getElementById("hit").disabled = false;
-  document.getElementById("stay").disabled = false;
+  document.getElementById("play").disabled = false;
 }
+///////////////////////////Win lose/////////////////////////////
+function decision(){
+  
+}
+///////////////////////////Hit Button/////////////////////////////
+function hitting(){
+  randomCard();
+  if(cardNum >= 9) cardNum = 10;
+  else cardNum++;
+  playerPoint += cardNum;
 
+  console.log(playerPoint);
+  cardSrc = "js/trump/" + cardName + ".png";
+  console.log("Src : ", cardSrc);
+  document.getElementById("container_p").innerHTML += 
+  "<img src = '" + cardSrc + "'>";
+}
+///////////////////////////First View/////////////////////////////
+function firstView(){
+  document.getElementById("container_d").innerHTML = 
+  "<img src = js/trump/back.png><img src = js/trump/back.png>";
+  document.getElementById("container_p").innerHTML = 
+  "<img src = js/trump/back.png><img src = js/trump/back.png>";
+}
 function start() {
+  firstView();
   var playButton = document.getElementById("play");
   playButton.addEventListener("click", playStart, false);
   var betButton = document.getElementById("bet");
   betButton.addEventListener("click", betStart, false);
+  var hitButton = document.getElementById("hit");
+  hitButton.addEventListener("click", hitting, false);
 } 
 
 window.addEventListener("load", start, false);
