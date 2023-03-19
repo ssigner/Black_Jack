@@ -1,8 +1,8 @@
 import cards from "./cards.js";
 
 //players card data
-const playerCard = [];
-const dealerCard = [];
+let playerCard = [];
+let dealerCard = [];
 let cardData = new cards()
 let playerPoint = 0;
 let dealerPoint = 0;
@@ -10,7 +10,20 @@ let betMoney = 0;
 let chip = 100;
 let hiddenCard = "";
 let cardType, cardNum, cardSrc = "", cardName = "";
+let hiddenTrue = false;
+let dealerStart = false;
 
+function reset(){
+  playerPoint = 0;
+  dealerPoint = 0;
+  betMoney = 0;
+  hiddenCard = "";
+  cardType, cardNum, cardSrc = "", cardName = "";
+  hiddenTrue = false;
+  dealerStart = false;
+  playerCard = [];
+  dealerCard = [];
+}
 ///////////////////////////Play Button/////////////////////////////
 
 function firstPoint(){
@@ -28,7 +41,7 @@ function firstPoint(){
   ){
     //1.5배 판정
     playerPoint = 21;
-    chip = parseInt(chip) + parseInt(betMoney) + parseInt(Math.round(betMoney * 1.5))
+    chip += betMoney + betMoney*1.5;
     betMoney = 0;
     document.getElementById("bet_place").style.display = 'none';
     document.getElementById("chip_count").innerHTML = chip;
@@ -73,13 +86,13 @@ function makeRandom(){
     }
     else if(i == 1) {
       console.log("dealer card : ", cardName);
-      hiddenCard = cardName;
+      hiddenCard = "js/trump/" + cardName + ".png";
       if(cardNum >= 9) cardNum = 10;
       else cardNum++;
       dealerCard.push(cardNum);
       cardSrc = "js/trump/back.png";
       console.log("Src : ", cardSrc);
-      dealerCon.innerHTML += "<img src = '" + cardSrc + "'>";
+      dealerCon.innerHTML += "<img id = 'hidden' src = '" + cardSrc + "'>";
     }
     else if(i >= 2) {
       console.log("player card : ", cardName);
@@ -103,18 +116,18 @@ function playStart(){
     document.getElementById("next_game").style.display = 'block';
     return;
   }
+  console.log(hiddenCard);
   document.getElementById("hit").disabled = false;
   document.getElementById("stay").disabled = false;
 }
 ///////////////////////////Bet Button/////////////////////////////
 function betStart(){
-  betMoney = document.getElementById("bet_money").value;
-  if(betMoney >= 1 && betMoney <= chip) writeBet(betMoney);
+  betMoney = parseInt(document.getElementById("bet_money").value);
+  if(betMoney >= 1 && betMoney <= chip) writeBet();
   else {
     alert("올바른 베팅 금액을 쓰세요.");
   }
 }
-
 function writeBet(){
   document.getElementById("bet_money").value = "";
   document.getElementById("bet_place").style.display = 'block';
@@ -126,18 +139,51 @@ function writeBet(){
 }
 ///////////////////////////Win lose/////////////////////////////
 function decision(dealerStart){
-  if(playerPoint > 21){
+  if(playerPoint > 21 && !dealerStart){
     document.getElementById("decision").innerHTML = 
     "YOU LOSE";
     decision_doc();
-    return 1;
-  } else {
-    return 0; //TODO stay시 딜러의 경우도 추가
+    return;
   }
+  if(dealerStart){
+    if(dealerPoint > 21 || dealerPoint < playerPoint){
+      betMoney *=2;
+      document.getElementById("decision").innerHTML = 
+      "YOU WIN";
+      calcChip();
+      decision_doc();
+      return;
+    }else if(playerPoint < dealerPoint){
+      betMoney = 0;
+      document.getElementById("decision").innerHTML = 
+      "YOU LOSE";
+      calcChip();
+      decision_doc();
+      
+      return;
+    }else {
+      document.getElementById("decision").innerHTML = 
+      "DRAW";
+      calcChip();
+      decision_doc();
+      return;
+    }
+  }
+}
+function calcChip(){
+  chip += betMoney;
+  document.getElementById("chip_count").innerHTML = chip;
 }
 function decision_doc(){
   document.getElementById("play").disabled = true;
   document.getElementById("next_game").style.display = 'block';
+  if(chip <= 0) {
+    document.getElementById("stop").disabled = false;
+    document.getElementById("again").disabled = true;
+  } else{
+    document.getElementById("stop").disabled = false;
+    document.getElementById("again").disabled = false;
+  }
   document.getElementById("hit").disabled = true;
   document.getElementById("stay").disabled = true;
   document.getElementById("bet_place").style.display = 'none';
@@ -155,7 +201,7 @@ function hitting(){
   console.log("Src : ", cardSrc);
   document.getElementById("container_p").innerHTML += 
   "<img src = '" + cardSrc + "'>";
-  if(decision()) return;
+  if(decision(dealerStart)) return;
 }
 ///////////////////////////First View/////////////////////////////
 function firstView(){
@@ -163,6 +209,43 @@ function firstView(){
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
   document.getElementById("container_p").innerHTML = 
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
+}
+///////////////////////////Stay Button/////////////////////////////
+function staying(){
+  if(!hiddenTrue) hiddenOpen();
+  setTimeout(function(){
+    if(dealerPoint >= 17) {
+      decision(dealerStart);
+      return;
+    }
+    else {
+      randomCard();
+      if(cardNum >= 9) cardNum = 10;
+      else cardNum++;
+      cardSrc = "js/trump/" + cardName + ".png";
+      document.getElementById("container_d").innerHTML +=
+      "<img src = '" + cardSrc + "'>"
+      dealerPoint += cardNum;
+      console.log(dealerPoint);
+      staying();
+    }
+  },1000)
+  dealerStart = true;
+}
+function hiddenOpen(){
+  document.getElementById("hidden").src = hiddenCard;
+  document.getElementById("hit").disabled = true;
+  document.getElementById("stay").disabled = true;
+  hiddenTrue = true;
+}
+///////////////////////////Again Button/////////////////////////////
+function doAgain(){
+  document.getElementById("next_game").style.display = 'none';
+  document.getElementById("bet_container").style.display = 'block';
+  document.getElementById("decision").innerHTML = "";
+  document.getElementById("bet_money").value = "";
+  firstView();
+  reset();
 }
 function start() {
   firstView();
@@ -172,6 +255,10 @@ function start() {
   betButton.addEventListener("click", betStart, false);
   var hitButton = document.getElementById("hit");
   hitButton.addEventListener("click", hitting, false);
+  var stayButton = document.getElementById("stay");
+  stayButton.addEventListener("click", staying, false);
+  var againButton = document.getElementById("again");
+  againButton.addEventListener("click", doAgain, false);
 } 
 
 window.addEventListener("load", start, false);
