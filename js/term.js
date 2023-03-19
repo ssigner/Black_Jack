@@ -1,31 +1,9 @@
+import cards from "./cards.js";
 
-//cards Data
-  const cards = new Array(4);
-  for(var i = 0; i < 4; i++){
-    cards[i] = new Array(13);
-  }
-  for(var i = 0; i < 4; i++){
-    for(var j = 1; j < 14; j++){
-      if(i == 0) cards[i][j-1] = "spade" + j;
-      if(i == 1) cards[i][j-1] = "heart" + j;
-      if(i == 2) cards[i][j-1] = "clover" + j;
-      if(i == 3) cards[i][j-1] = "diamond" + j;
-    }
-  }
-
-  let cardsCheck = new Array(4);
-  for(var i = 0; i < 4; i++){
-    cardsCheck[i] = new Array(13);
-  }
-  for(var i = 0; i < 4; i++){
-    for(var j = 0; j < 13; j++){
-      cardsCheck[i][j] = false;
-    }
-  }
 //players card data
-
 const playerCard = [];
 const dealerCard = [];
+let cardData = new cards()
 let playerPoint = 0;
 let dealerPoint = 0;
 let betMoney = 0;
@@ -65,9 +43,9 @@ function randomCard(){
   
   //카드 명 정하고 카드 배열에 push
   while(true){
-    if(!cardsCheck[cardType][cardNum]){
-      cardName = cards[cardType][cardNum];
-      cardsCheck[cardType][cardNum] = true;
+    if(!cardData.cardsCheck[cardType][cardNum]){
+      cardName = cardData.card[cardType][cardNum];
+      cardData.cardsCheck[cardType][cardNum] = true;
       break;
     }
     else {
