@@ -12,6 +12,8 @@ let hiddenCard = "";
 let cardType, cardNum, cardSrc = "", cardName = "";
 let hiddenTrue = false;
 let dealerStart = false;
+let highScore = 0;
+const key = "highScore"
 
 function reset(){
   playerPoint = 0;
@@ -247,8 +249,41 @@ function doAgain(){
   firstView();
   reset();
 }
+///////////////////////////Stop Button/////////////////////////////
+function stopping(){
+  if(chip == 0){
+    doAgain();
+  }
+  else{
+    highScore = chip;
+    document.getElementById("score_point").innerHTML = highScore;
+
+    if(localStorage.getItem(key) == null){
+      localStorage.setItem(key, highScore.toString());
+      console.log(localStorage.getItem(key));
+    } else {
+      if(parseInt(localStorage.getItem(key)) < highScore){
+        localStorage.setItem(key, highScore.toString());
+        console.log(localStorage.getItem(key));
+      }
+    }
+    doAgain();
+  }
+  console.log(localStorage.getItem(key));
+  chip = 100;
+  document.getElementById("chip_count").innerHTML = chip;
+}
+///////////////////////////High score view/////////////////////////////
+function getHighScore(){
+  if(localStorage.getItem(key) != null){
+    highScore = parseInt(localStorage.getItem(key));
+    document.getElementById("score_point").innerHTML = highScore;
+  }
+}
+
 function start() {
   firstView();
+  getHighScore();
   var playButton = document.getElementById("play");
   playButton.addEventListener("click", playStart, false);
   var betButton = document.getElementById("bet");
@@ -259,6 +294,8 @@ function start() {
   stayButton.addEventListener("click", staying, false);
   var againButton = document.getElementById("again");
   againButton.addEventListener("click", doAgain, false);
+  var stopButton = document.getElementById("stop");
+  stopButton.addEventListener("click", stopping, false);
 } 
 
-window.addEventListener("load", start, false);
+addEventListener("load", start, false);
