@@ -108,9 +108,13 @@ function makeRandom(){
   }
 }
 function playStart(){
+  setTimeout(()=>{console.log("")}, 25);
   document.getElementById("play").disabled = true
   makeRandom();
   firstPoint();
+  document.getElementById("player_point").innerHTML = playerPoint;
+  document.getElementById("dealer_point").innerHTML = 
+  dealerPoint - dealerCard[1];
   if(playerPoint == 21){
     document.getElementById("decision").innerHTML = 
     "YOU WIN";
@@ -124,6 +128,7 @@ function playStart(){
 }
 ///////////////////////////Bet Button/////////////////////////////
 function betStart(){
+  setTimeout(()=>{console.log("")}, 25);
   betMoney = parseInt(document.getElementById("bet_money").value);
   if(betMoney >= 1 && betMoney <= chip) writeBet();
   else {
@@ -141,6 +146,7 @@ function writeBet(){
 }
 ///////////////////////////Win lose/////////////////////////////
 function decision(dealerStart){
+  setTimeout(()=>{console.log("")}, 100);
   if(playerPoint > 21 && !dealerStart){
     document.getElementById("decision").innerHTML = 
     "YOU LOSE";
@@ -198,12 +204,14 @@ function hitting(){
   if(cardNum >= 9) cardNum = 10;
   else cardNum++;
   playerPoint += cardNum;
+  document.getElementById("player_point").innerHTML = playerPoint;
   console.log(playerPoint);
   cardSrc = "js/trump/" + cardName + ".png";
   console.log("Src : ", cardSrc);
   document.getElementById("container_p").innerHTML += 
   "<img src = '" + cardSrc + "'>";
   if(decision(dealerStart)) return;
+  setTimeout(()=>{console.log("")}, 25);
 }
 ///////////////////////////First View/////////////////////////////
 function firstView(){
@@ -211,11 +219,14 @@ function firstView(){
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
   document.getElementById("container_p").innerHTML = 
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
+  setTimeout(()=>{console.log("")}, 100);
 }
 ///////////////////////////Stay Button/////////////////////////////
 function staying(){
   if(!hiddenTrue) hiddenOpen();
+  document.getElementById("dealer_point").innerHTML = dealerPoint;
   setTimeout(function(){
+    
     if(dealerPoint >= 17) {
       decision(dealerStart);
       return;
@@ -228,11 +239,14 @@ function staying(){
       document.getElementById("container_d").innerHTML +=
       "<img src = '" + cardSrc + "'>"
       dealerPoint += cardNum;
+      document.getElementById("dealer_point").innerHTML = dealerPoint;
       console.log(dealerPoint);
       staying();
     }
-  },1000)
+  },2000)
   dealerStart = true;
+  setTimeout(()=>{console.log("")}, 25);
+
 }
 function hiddenOpen(){
   document.getElementById("hidden").src = hiddenCard;
@@ -248,6 +262,9 @@ function doAgain(){
   document.getElementById("bet_money").value = "";
   firstView();
   reset();
+  document.getElementById("player_point").innerHTML = playerPoint;
+  document.getElementById("dealer_point").innerHTML = dealerPoint;
+  setTimeout(()=>{console.log("")}, 25);
 }
 ///////////////////////////Stop Button/////////////////////////////
 function stopping(){
@@ -272,12 +289,14 @@ function stopping(){
   console.log(localStorage.getItem(key));
   chip = 100;
   document.getElementById("chip_count").innerHTML = chip;
+  setTimeout(()=>{console.log("")}, 25);
 }
 ///////////////////////////High score view/////////////////////////////
 function getHighScore(){
   if(localStorage.getItem(key) != null){
     highScore = parseInt(localStorage.getItem(key));
     document.getElementById("score_point").innerHTML = highScore;
+    setTimeout(()=>{console.log("")}, 25);
   }
 }
 
