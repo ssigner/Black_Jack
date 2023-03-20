@@ -108,7 +108,7 @@ function makeRandom(){
   }
 }
 function playStart(){
-  setTimeout(()=>{console.log("")}, 1000);
+  setTimeout(()=>{console.log("")}, 2000);
   document.getElementById("play").disabled = true
   makeRandom();
   firstPoint();
