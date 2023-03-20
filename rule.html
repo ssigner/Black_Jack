@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2299.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #000000; -webkit-text-stroke: #4689cc; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #000000; -webkit-text-stroke: #cacaca; background-color: #000000; background-color: rgba(0, 0, 0, 0)}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo; color: #000000; -webkit-text-stroke: #cacaca; background-color: #000000; background-color: rgba(0, 0, 0, 0); min-height: 14.0px}
+    span.s1 {font-kerning: none}
+    span.s2 {font-kerning: none; -webkit-text-stroke: 0px #5581e0}
+  </style>
+</head>
+<body>
+<p class="p1"><span class="s1"><b># Black-Jack</b></span></p>
+<p class="p2"><span class="s1">블랙잭 규칙</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1">기본 용어</span></p>
+<p class="p2"><span class="s2">1.</span><span class="s1"> HIT</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 처음 2장의 상태에서 카드를 더 받는 것</span></p>
+<p class="p2"><span class="s2">2.</span><span class="s1"> STAY</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 추가 카드를 더 이상 받지 않는 것</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 플레이어의 경우, Stay 선언시 딜러가 룰에 따라 Hit을 하거나 Stay를 함</span></p>
+<p class="p2"><span class="s2">3.</span><span class="s1"> BUST</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 카드 총합이 21을 넘는 경우</span></p>
+<p class="p2"><span class="s2">4.</span><span class="s1"> Black Jack</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> A한장과 10~K의 조합이 나오는 것. 배팅 금액의 1.5배</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1">게임 진행</span></p>
+<p class="p2"><span class="s2">1.</span><span class="s1"> A는 1 또는 11</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 단, 블랙잭이 되는 경우만 11, 나머지는 1</span></p>
+<p class="p2"><span class="s2">2.</span><span class="s1"> 게임 시작후, 딜러와 플레이어는 각각 2장의 카드를 받는다.</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 딜러는 1장 비공개</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 플레이어가 에이스와 10~K중 한장이 있으면 블랙잭, 1.5배 -&gt; 100원을 걸었으면 250원</span></p>
+<p class="p2"><span class="s2">3.</span><span class="s1"> 플레이어는 블랙잭이 아닌 경우, 카드를 추가로 받을 수 있다. 21이나 초과가 아닌 한 계속 받을 수 있다.</span></p>
+<p class="p2"><span class="s2">4.</span><span class="s1"> 딜러는 플레이어의 추가 카드 받기가 끝난 후, 딜러의 카드가 16점 이하면 Hit, 17점 이상이면 Stay</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1">게임 결과</span></p>
+<p class="p2"><span class="s2">1.</span><span class="s1"> 플레이어 승리 시(딜러 Bust)</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 배팅 금액의 1배 -&gt; 100원을 걸면 200원을 받음</span></p>
+<p class="p2"><span class="s2">2.</span><span class="s1"> 딜러 승리 시(플레이어 Bust)</span></p>
+<p class="p2"><span class="s2">-</span><span class="s1"> 플레이어는 배팅 금액을 잃음</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s1">이 프로젝트에서의 진행방법</span></p>
+<p class="p2"><span class="s2">1.</span><span class="s1"> play버튼 누르기</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2">2.</span><span class="s1"> 나타난 배팅칸에 배팅금액 입력</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2">3.</span><span class="s1"> 받은 카드를 보고, HIT 이나 STAY진행</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2">4.</span><span class="s1"> AGAIN? 버튼시 결과에 따라 칩수 반영후 한판더</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+<p class="p2"><span class="s2">5.</span><span class="s1"> STOP 버튼시 얻은 모든 칩을 하이스코어로 환산후 로컬 스토리지에 저장, 다음에 브라우저를 열 시 반영되어 있음.</span></p>
+<p class="p3"><span class="s1"></span><br></p>
+</body>
+</html>
