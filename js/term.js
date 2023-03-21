@@ -272,20 +272,17 @@ function stopping(){
     doAgain();
   }
   else{
-    highScore = chip;
-    document.getElementById("score_point").innerHTML = highScore;
-
     if(localStorage.getItem(key) == null){
       localStorage.setItem(key, highScore.toString());
       console.log(localStorage.getItem(key));
-    } else {
-      if(parseInt(localStorage.getItem(key)) < highScore){
-        localStorage.setItem(key, highScore.toString());
-        console.log(localStorage.getItem(key));
-      }
     }
-    doAgain();
+    else if(chip > parseInt(localStorage.getItem(key))){
+      highScore = chip;
+      localStorage.setItem(key, highScore.toString());
+      console.log(localStorage.getItem(key));
+    }
   }
+  doAgain();
   console.log(localStorage.getItem(key));
   chip = 100;
   document.getElementById("chip_count").innerHTML = chip;
@@ -297,7 +294,7 @@ function getHighScore(){
     highScore = parseInt(localStorage.getItem(key));
     document.getElementById("score_point").innerHTML = highScore;
     setTimeout(()=>{console.log("")}, 1000);
-  }
+  } 
 }
 
 function start() {
