@@ -8,7 +8,7 @@ img
 {
   width : 100px; 
   height: 143px;
-  animation: fadeIn 2s;
+  animation: fadeIn 1s;
   animation-fill-mode: forwards;
 }
 
