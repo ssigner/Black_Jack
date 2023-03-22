@@ -1,3 +1,4 @@
+//완성 ver.1
 import cards from "./cards.js";
 
 //players card data
