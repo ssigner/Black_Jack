@@ -112,8 +112,7 @@ function playStart(){
   if(playerPoint == 21){
     document.getElementById("decision").innerHTML = 
     "YOU WIN";
-    document.getElementById("play").disabled = true;
-    document.getElementById("next_game").style.display = 'block';
+    doAgain();
     return;
   }
   document.getElementById("hit").disabled = false;
