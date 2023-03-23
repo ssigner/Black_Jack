@@ -1,4 +1,4 @@
-//완성 ver.1
+//완성 ver.2
 import cards from "./cards.js";
 
 //players card data
@@ -269,19 +269,10 @@ function doAgain(){
 }
 ///////////////////////////Stop Button/////////////////////////////
 function stopping(){
-  if(chip == 0){
-    doAgain();
-  }
-  else{
-    if(localStorage.getItem(key) == null){
-      localStorage.setItem(key, highScore.toString());
-      console.log(localStorage.getItem(key));
-    }
-    else if(chip > parseInt(localStorage.getItem(key))){
-      highScore = chip;
-      localStorage.setItem(key, highScore.toString());
-      console.log(localStorage.getItem(key));
-    }
+  if(chip != 0 && chip > parseInt(localStorage.getItem(key))){
+    highScore = chip;
+    localStorage.setItem(key, highScore.toString());
+    console.log(localStorage.getItem(key));
   }
   doAgain();
   console.log(localStorage.getItem(key));
@@ -295,7 +286,9 @@ function getHighScore(){
     highScore = parseInt(localStorage.getItem(key));
     document.getElementById("score_point").innerHTML = highScore;
     setTimeout(()=>{console.log("")}, 1000);
-  } 
+  } else {
+    localStorage.setItem(key, "0");
+  }
 }
 
 function start() {
