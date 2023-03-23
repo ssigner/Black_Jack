@@ -272,7 +272,7 @@ function stopping(){
   if(chip != 0 && chip > parseInt(localStorage.getItem(key))){
     highScore = chip;
     localStorage.setItem(key, highScore.toString());
-    console.log(localStorage.getItem(key));
+    document.getElementById("score_point").innerHTML = highScore;
   }
   doAgain();
   console.log(localStorage.getItem(key));
