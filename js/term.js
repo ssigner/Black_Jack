@@ -121,6 +121,11 @@ function playStart(){
 ///////////////////////////Bet Button/////////////////////////////
 function betStart(){
   setTimeout(()=>{;}, 1000);
+  if(document.getElementById("bet_money").value == "showmethemoney"){
+    chip = 7777;
+    document.getElementById("chip_count").innerHTML = chip;
+    return;
+  }
   betMoney = parseInt(document.getElementById("bet_money").value);
   if(betMoney >= 1 && betMoney <= chip) writeBet();
   else {
