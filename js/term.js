@@ -139,6 +139,7 @@ function betStart(){
   if(betMoney >= 1 && betMoney <= chip) writeBet();
   else {
     alert("올바른 베팅 금액을 쓰세요.");
+    document.getElementById("bet_money").value = "";
   }
 }
 function writeBet(){
