@@ -112,13 +112,16 @@ function playStart(){
   makeRandom();
   firstPoint();
   document.getElementById("player_point").innerHTML = playerPoint;
-  if(dealerPoint == 21){
-    if(dealerCard[0] == 1) document.getElementById("dealer_point").innerHTML = 1;
-    else document.getElementById("dealer_point").innerHTML = 10;
+  document.getElementById("dealer_point").innerHTML = ㄴdealerPoint - dealerCard[1];
+  /* if(dealerPoint == 21){
+    if(dealerCard[0] == 1) 
+      document.getElementById("dealer_point").innerHTML = 1;
+    else 
+      document.getElementById("dealer_point").innerHTML = 10;
   } else {
     document.getElementById("dealer_point").innerHTML = 
     dealerPoint - dealerCard[1];
-  }
+  } */
   if(playerPoint == 21){
     document.getElementById("decision").innerHTML = 
     "YOU WIN";
