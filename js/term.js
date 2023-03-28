@@ -112,7 +112,7 @@ function playStart(){
   makeRandom();
   firstPoint();
   document.getElementById("player_point").innerHTML = playerPoint;
-  document.getElementById("dealer_point").innerHTML = ㄴdealerPoint - dealerCard[1];
+  document.getElementById("dealer_point").innerHTML = dealerPoint - dealerCard[1];
   /* if(dealerPoint == 21){
     if(dealerCard[0] == 1) 
       document.getElementById("dealer_point").innerHTML = 1;
