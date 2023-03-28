@@ -116,7 +116,8 @@ function playStart(){
     if(dealerCard[0] == 1) document.getElementById("dealer_point").innerHTML = 1;
     else document.getElementById("dealer_point").innerHTML = 10;
   } else {
-    document.getElementById("dealer_point").innerHTML = dealerPoint - dealerCard[1];
+    document.getElementById("dealer_point").innerHTML = 
+    dealerPoint - dealerCard[1];
   }
   if(playerPoint == 21){
     document.getElementById("decision").innerHTML = 
