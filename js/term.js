@@ -107,7 +107,7 @@ function makeRandom(){
   }
 }
 function playStart(){
-  setTimeout(()=>{;}, 2000);
+  setTimeout(()=>{;}, 100);
   document.getElementById("play").disabled = true
   makeRandom();
   firstPoint();
@@ -125,7 +125,7 @@ function playStart(){
 }
 ///////////////////////////Bet Button/////////////////////////////
 function betStart(){
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
   if(document.getElementById("bet_money").value == "showmethemoney"){
     chip = 7777;
     document.getElementById("chip_count").innerHTML = chip;
@@ -148,7 +148,7 @@ function writeBet(){
 }
 ///////////////////////////Win lose/////////////////////////////
 function decision(dealerStart){
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
   if(playerPoint > 21 && !dealerStart){
     document.getElementById("decision").innerHTML = 
     "YOU LOSE";
@@ -202,7 +202,7 @@ function decision_doc(){
 }
 ///////////////////////////Hit Button/////////////////////////////
 function hitting(){
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
   randomCard();
   if(cardNum >= 9) cardNum = 10;
   else cardNum++;
@@ -220,7 +220,7 @@ function firstView(){
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
   document.getElementById("container_p").innerHTML = 
   "<img src = js/trump/back.png><img src = js/trump/back.png>";
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
 }
 ///////////////////////////Stay Button/////////////////////////////
 function staying(){
@@ -243,7 +243,7 @@ function staying(){
       document.getElementById("dealer_point").innerHTML = dealerPoint;
       staying();
     }
-  },2500)
+  },2000)
   dealerStart = true;
   setTimeout(()=>{;}, 25);
 
@@ -264,7 +264,7 @@ function doAgain(){
   reset();
   document.getElementById("player_point").innerHTML = playerPoint;
   document.getElementById("dealer_point").innerHTML = dealerPoint;
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
 }
 ///////////////////////////Stop Button/////////////////////////////
 function stopping(){
@@ -276,14 +276,14 @@ function stopping(){
   doAgain();
   chip = 100;
   document.getElementById("chip_count").innerHTML = chip;
-  setTimeout(()=>{;}, 1000);
+  setTimeout(()=>{;}, 100);
 }
 ///////////////////////////High score view/////////////////////////////
 function getHighScore(){
   if(localStorage.getItem(key) != null){
     highScore = parseInt(localStorage.getItem(key));
     document.getElementById("score_point").innerHTML = highScore;
-    setTimeout(()=>{;}, 1000);
+    setTimeout(()=>{;}, 100);
   } else {
     localStorage.setItem(key, "0");
   }

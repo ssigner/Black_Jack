@@ -9,7 +9,7 @@ img
 {
   width : 100px; 
   height: 143px;
-  animation: fadeIn 1s;
+  animation: fadeIn 2s;
   animation-fill-mode: forwards;
 }
 
