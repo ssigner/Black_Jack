@@ -1,4 +1,4 @@
-//완성 ver.2
+//완성 ver.2.1
 import cards from "./cards.js";
 
 //players card data
@@ -114,11 +114,8 @@ function playStart(){
   document.getElementById("player_point").innerHTML = playerPoint;
   //document.getElementById("dealer_point").innerHTML = dealerPoint - dealerCard[1];
   if(dealerPoint == 21){
-    if(dealerCard[0] == 1) 
-      document.getElementById("dealer_point").innerHTML = 1;
-    else if(dealerCard[1] == 1)
-      document.getElementById("dealer_point").innerHTML = 10;
-  } else if(dealerCard < 21){
+    document.getElementById("dealer_point").innerHTML = dealerCard[0];
+  } else {
     document.getElementById("dealer_point").innerHTML = dealerPoint - dealerCard[1];
   }
   if(playerPoint == 21){

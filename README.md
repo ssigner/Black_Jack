@@ -1,4 +1,4 @@
-# Black-Jack Ver.2
+# Black-Jack Ver.2.1
 블랙잭 규칙
 
 기본 용어

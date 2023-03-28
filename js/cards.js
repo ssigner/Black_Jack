@@ -1,4 +1,4 @@
-//완성 ver.2
+//완성 ver.2.1
 const card = new Array(4);
 for(var i = 0; i < 4; i++){
   card[i] = new Array(13);
