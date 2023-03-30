@@ -1,4 +1,4 @@
-//완성 ver.2.3
+//완성 ver.2.4
 import cards from "./cards.js";
 
 //players card data
@@ -36,7 +36,7 @@ function reset(){
 
 function firstPoint(){
   //첫 카드가 블랙잭일 경우
-  playerCard[0] = 1; playerCard[1] = 10;
+  //playerCard[0] = 1; playerCard[1] = 10;
   if(
     (dealerCard[0] == 1 && dealerCard[1] == 10) ||
     (dealerCard[0] == 10 && dealerCard[1] == 1) 
