@@ -1,4 +1,4 @@
-//완성 ver.2.1
+//완성 ver.2.2
 import cards from "./cards.js";
 
 //players card data
@@ -50,9 +50,8 @@ function firstPoint(){
     //1.5배 판정
     playerPoint = 21;
     chip += betMoney + betMoney*1.5;
-    betMoney = 0;
-    document.getElementById("bet_place").style.display = 'none';
-    document.getElementById("chip_count").innerHTML = chip;
+    calcChip();
+    decision_doc();
   } 
   else playerPoint = playerCard[0] + playerCard[1];
 }
@@ -121,7 +120,6 @@ function playStart(){
   if(playerPoint == 21){
     document.getElementById("decision").innerHTML = 
     "YOU WIN";
-    doAgain();
     return;
   }
   document.getElementById("hit").disabled = false;
