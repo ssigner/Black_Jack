@@ -1,6 +1,8 @@
 # Black-Jack Ver.2.4
 블랙잭 규칙
 
+https://ssigner.github.io/Black_Jack/
+
 기본 용어
 1. HIT
 - 처음 2장의 상태에서 카드를 더 받는 것
